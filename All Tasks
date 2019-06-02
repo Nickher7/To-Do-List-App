@@ -1,0 +1,52 @@
+from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+class AllTasks(AllTasksTemplate):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    # Any code you write here will run when the form opens.
+    self.repeating_panel_1.items = app_tables.todos.search(Done=False)
+
+
+
+  def button_1_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    app_tables.todos.add_row(Task=self.New_reminder_box.text, Done=False)
+    self.repeating_panel_1.items = app_tables.todos.search(Done=False)
+    self.New_reminder_box.text = ''
+    pass
+
+  
+  
+  
+  
+  def New_reminder_box_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    pass
+
+ 
+  
+  
+  def link_2_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('AllCompletedTasks')
+    pass
+
+  
+  
+  
+  
+  
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('AllTasks') 
+    pass
+
+
+
+
+
